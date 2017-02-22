@@ -21,17 +21,24 @@ class SauronServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Perform post-registration booting of services.
+     * Bootstrap the application services.
      *
      * @return void
      */
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/database/create_domains_table.php');
+
+        $this->publishes([
+            __DIR__.'/config/sauron.php' => config_path('sauron.php'),
+        ]);
+
+        $this->app->Register('GrahamCampbell\Bitbucket\BitbucketServiceProvider');
+        $this->app->Register('GrahamCampbell\GitHub\GitHubServiceProvider');
     }
 
     /**
-     * Register the service provider.
+     * Register bindings in the container.
      *
      * @return void
      */
