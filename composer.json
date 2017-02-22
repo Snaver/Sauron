@@ -3,6 +3,7 @@
     "description": "Laravel 5.3+ project to monitor changes in Whois and DNS records.",
     "license": "MIT",
     "keywords": ["laravel", "dns", "whois", "github", "bitbucket", "jobs", "queue"],
+    "homepage": "https://github.com/Snaver/Sauron",
     "authors": [
         {
             "name": "Richard",
@@ -19,7 +20,7 @@
         "pda/pheanstalk": "^3.1"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Snaver\\Sauron\\": "src/"
         }
     }
