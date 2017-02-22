@@ -48,11 +48,11 @@ return [
     |
     */
     'locations' => [
-        [
-            'location' => 'China',
-            'node' => 'cn01',
-            'operator' => 'CNNIC',
-        ],
+        //[
+        //    'location' => 'China',
+        //    'node' => 'cn01',
+        //    'operator' => 'CNNIC',
+        //],
         [
             'location' => 'Germany',
             'node' => 'de01',

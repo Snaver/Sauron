@@ -2,13 +2,13 @@
 
 namespace Snaver\Sauron;
 
-use App\Jobs\WhoIsCheck;
-use App\Domain;
+use Snaver\Sauron\Jobs\WhoIsCheck;
+use Snaver\Sauron\Domain;
 
 class WhoIsChecks
 {
 
-    public function run()
+    public function run($dryRun = false)
     {
         $domains = Domain::all();
 
@@ -21,7 +21,7 @@ class WhoIsChecks
 
         foreach($domains as $domain)
         {
-            dispatch(new WhoIsCheck($domain, $this->gist_id));
+            dispatch(new WhoIsCheck($domain, $this->gist_id, $dryRun));
 
             // Only run once on local..
             if (app('app')->environment() == 'local') break;

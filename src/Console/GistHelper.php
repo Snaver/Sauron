@@ -4,7 +4,7 @@ namespace Snaver\Sauron\Console;
 
 use Illuminate\Console\Command;
 
-use App\Gist;
+use Snaver\Sauron\Gist;
 
 class GistHelper extends Command
 {

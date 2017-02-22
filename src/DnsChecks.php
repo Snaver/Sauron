@@ -2,8 +2,8 @@
 
 namespace Snaver\Sauron;
 
-use App\Jobs\DnsCheck;
-use App\Domain;
+use Snaver\Sauron\Jobs\DnsCheck;
+use Snaver\Sauron\Domain;
 
 class DnsChecks
 {
@@ -12,7 +12,7 @@ class DnsChecks
      * Setup each DNS jobs and queue them
      *
      */
-    public function run()
+    public function run($dryRun = false)
     {
         $domains = Domain::all();
 
@@ -31,7 +31,7 @@ class DnsChecks
             {
                 foreach($this->locations as $location)
                 {
-                    dispatch(new DnsCheck($location['node'], $domain, $type, $this->gist_id));
+                    dispatch(new DnsCheck($location['node'], $domain, $type, $this->gist_id, $dryRun));
                 }
             }
 

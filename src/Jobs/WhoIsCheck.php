@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\Domain;
+use Snaver\Sauron\Domain;
 
 use Unirest;
 use GrahamCampbell\GitHub\GitHubManager;
@@ -24,10 +24,11 @@ class WhoIsCheck implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Domain $domain, $gist_id)
+    public function __construct(Domain $domain, $gist_id, $dryRun)
     {
         $this->domain = $domain;
         $this->gist_id = $gist_id;
+        $this->dryRun = $dryRun;
     }
 
     /**
@@ -74,7 +75,9 @@ class WhoIsCheck implements ShouldQueue
 
                     //dd($update);
 
-                    $gist = $github->api('gists')->update($this->gist_id, $update);
+                    if(!$this->dryRun){
+                        $gist = $github->api('gists')->update($this->gist_id, $update);
+                    }
 
                     $admin->notify(new WhoisChanged($this->domain));
 

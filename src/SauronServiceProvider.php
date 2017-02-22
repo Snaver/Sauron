@@ -27,10 +27,10 @@ class SauronServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/database/create_domains_table.php');
+        $this->loadMigrationsFrom(__DIR__.'/../database/create_domains_table.php');
 
         $this->publishes([
-            __DIR__.'/config/sauron.php' => config_path('sauron.php'),
+            __DIR__.'/../config/sauron.php' => config_path('sauron.php'),
         ]);
 
         $this->app->Register('GrahamCampbell\Bitbucket\BitbucketServiceProvider');
@@ -45,8 +45,11 @@ class SauronServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            Commands\Checks::class,
-            Commands\GistHelper::class
+            Console\Checks::class,
+            Console\GistHelper::class
         ]);
+
+        // Load the config file and merge it with the user's (should it get published)
+        $this->mergeConfigFrom( __DIR__.'/../config/sauron.php', 'sauron');
     }
 }

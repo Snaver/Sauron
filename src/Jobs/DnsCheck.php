@@ -7,9 +7,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\Notifications\DnsChanged;
-use App\Domain;
-use App\Admin;
+use Snaver\Sauron\Notifications\DnsChanged;
+use Snaver\Sauron\Domain;
+use Snaver\Sauron\Admin;
 
 use Unirest;
 use GrahamCampbell\GitHub\GitHubManager;
@@ -28,13 +28,14 @@ class DnsCheck implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($location, Domain $domain, $type, $gist_id)
+    public function __construct($location, Domain $domain, $type, $gist_id, $dryRun)
     {
         $this->location = $location;
         $this->domain = $domain;
         $this->type = $type;
 
         $this->gist_id = $gist_id;
+        $this->dryRun = $dryRun;
     }
 
     /**
@@ -97,7 +98,9 @@ class DnsCheck implements ShouldQueue
 
                     //dd($update);
 
-                    $gist = $github->api('gists')->update($this->gist_id, $update);
+                    if(!$this->dryRun){
+                        $gist = $github->api('gists')->update($this->gist_id, $update);
+                    }
 
                     $admin->notify(new DnsChanged($this->location, $this->domain->domain, $this->type));
 

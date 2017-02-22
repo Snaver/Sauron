@@ -7,6 +7,19 @@ Alternatively a new set of [Laravel artisan commands](https://laravel.com/docs/5
 
 Both checks return JSON results which are stored as text diffs in a single [GitHub Gist](https://gist.github.com/), by storing them this way instead of say a database it prevents data duplication and allows you to see the historical differences over time.
 
+# Configuration
+
+BITBUCKET_USERNAME=
+BITBUCKET_PASSWORD=
+
+GITHUB_TOKEN=
+GITHUB_GIST_ID=
+
+JSONWHOISAPI_API_KEY=
+JSONWHOISAPI_CUSTOMER_ID=
+
+JSONWHOIS_API_KEY=
+
 # TODO
 
 * Add notifications upon changes - email, slack, webhook

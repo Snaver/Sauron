@@ -4,8 +4,8 @@ namespace Snaver\Sauron\Console;
 
 use Illuminate\Console\Command;
 
-use App\DnsChecks;
-use App\WhoIsChecks;
+use Snaver\Sauron\DnsChecks;
+use Snaver\Sauron\WhoIsChecks;
 
 class Checks extends Command
 {
@@ -14,14 +14,15 @@ class Checks extends Command
      *
      * @var string
      */
-    protected $signature = 'checks:run {type}';
+    protected $signature = 'checks:run {type}
+    {--dry-run : Execute as a dry run. }';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run Sauron Checks';
+    protected $description = 'Run Sauron Checks, `dns` or `whois`';
 
     protected $dnscheck;
     protected $whoischeck;
@@ -48,10 +49,10 @@ class Checks extends Command
     {
         switch ($this->argument('type')) {
             case 'dns':
-                $this->dnscheck->run();
+                $this->dnscheck->run($this->option('dry-run') ? true : false);
             break;
             case 'whois':
-                $this->whoischeck->run();
+                $this->whoischeck->run($this->option('dry-run') ? true : false);
             break;
         }
     }
