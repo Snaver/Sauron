@@ -17,5 +17,10 @@
         "graham-campbell/github": "^4.4",
         "mashape/unirest-php": "^3.0",
         "pda/pheanstalk": "^3.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Snaver\\Sauron\\": "src/"
+        }
     }
 }
