@@ -22,6 +22,7 @@ class DnsCheck implements ShouldQueue
     protected $domain;
     protected $type;
     protected $gist_id;
+    protected $dryRun;
 
     /**
      * Create a new job instance.
@@ -100,9 +101,9 @@ class DnsCheck implements ShouldQueue
 
                     if(!$this->dryRun){
                         $gist = $github->api('gists')->update($this->gist_id, $update);
-                    }
 
-                    $admin->notify(new DnsChanged($this->location, $this->domain->domain, $this->type));
+                        $admin->notify(new DnsChanged($this->location, $this->domain, $this->type));
+                    }
 
                     echo $this->location.'/'.$this->domain->domain.'/'.$this->type . ' changes found - updating.'.PHP_EOL;
                 }
@@ -115,7 +116,9 @@ class DnsCheck implements ShouldQueue
             // Go easy..
             sleep(1);
         } catch (Exception $ex) {
-            Log::error($ex);
+            echo $e->getMessage();
+
+            Log::error($e->getMessage());
         }
     }
 }

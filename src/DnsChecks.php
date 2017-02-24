@@ -12,18 +12,22 @@ class DnsChecks
      * Setup each DNS jobs and queue them
      *
      */
-    public function run($dryRun = false)
+    public function run($dryRun = false, $domain = '')
     {
-        $domains = Domain::all();
+        $this->gist_id = env('GITHUB_GIST_ID');
+        $this->records = config('sauron.records');
+        $this->locations = config('sauron.locations');
+
+        if ($domain) {
+            $domains = Domain::where('domain', $domain)->get();
+        } else {
+            $domains = Domain::all();
+        }
 
         if($domains->isEmpty())
         {
             dd('No domains!');
         }
-
-        $this->gist_id = env('GITHUB_GIST_ID');
-        $this->records = config('sauron.records');
-        $this->locations = config('sauron.locations');
 
         foreach($domains as $domain)
         {

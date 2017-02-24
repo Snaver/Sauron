@@ -7,7 +7,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Snaver\Sauron\Notifications\WhoisChanged;
 use Snaver\Sauron\Domain;
+use Snaver\Sauron\Admin;
 
 use Unirest;
 use GrahamCampbell\GitHub\GitHubManager;
@@ -18,6 +20,7 @@ class WhoIsCheck implements ShouldQueue
 
     protected $domain;
     protected $gist_id;
+    protected $dryRun;
 
     /**
      * Create a new job instance.
@@ -36,7 +39,7 @@ class WhoIsCheck implements ShouldQueue
      *
      * @return void
      */
-    public function handle(GitHubManager $github)
+    public function handle(GitHubManager $github, Admin $admin)
     {
         if ($this->attempts() > 3)
         {
@@ -77,9 +80,9 @@ class WhoIsCheck implements ShouldQueue
 
                     if(!$this->dryRun){
                         $gist = $github->api('gists')->update($this->gist_id, $update);
-                    }
 
-                    $admin->notify(new WhoisChanged($this->domain));
+                        $admin->notify(new WhoisChanged($this->domain));
+                    }
 
                     echo $this->domain->domain . ' changes found - updating.'.PHP_EOL;
                 }
@@ -92,7 +95,9 @@ class WhoIsCheck implements ShouldQueue
             // Go easy..
             sleep(1);
         } catch (Exception $ex) {
-            Log::error($ex);
+            echo $e->getMessage();
+
+            Log::error($e->getMessage());
         }
     }
 }

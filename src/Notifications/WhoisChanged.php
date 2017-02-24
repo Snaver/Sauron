@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use Snaver\Sauron\Domain;
+
 class WhoisChanged extends Notification
 {
     use Queueable;

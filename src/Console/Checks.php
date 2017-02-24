@@ -14,7 +14,7 @@ class Checks extends Command
      *
      * @var string
      */
-    protected $signature = 'checks:run {type}
+    protected $signature = 'checks:run {type} {domain?}
     {--dry-run : Execute as a dry run. }';
 
     /**
@@ -49,10 +49,10 @@ class Checks extends Command
     {
         switch ($this->argument('type')) {
             case 'dns':
-                $this->dnscheck->run($this->option('dry-run') ? true : false);
+                $this->dnscheck->run($this->option('dry-run') ? true : false, $this->argument('domain'));
             break;
             case 'whois':
-                $this->whoischeck->run($this->option('dry-run') ? true : false);
+                $this->whoischeck->run($this->option('dry-run') ? true : false, $this->argument('domain'));
             break;
         }
     }

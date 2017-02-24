@@ -8,16 +8,20 @@ use Snaver\Sauron\Domain;
 class WhoIsChecks
 {
 
-    public function run($dryRun = false)
+    public function run($dryRun = false, $domain = '')
     {
-        $domains = Domain::all();
+        $this->gist_id = env('GITHUB_GIST_ID');
+
+        if ($domain) {
+            $domains = Domain::where('domain', $domain)->get();
+        } else {
+            $domains = Domain::all();
+        }
 
         if($domains->isEmpty())
         {
             dd('No domains!');
         }
-
-        $this->gist_id = env('GITHUB_GIST_ID');
 
         foreach($domains as $domain)
         {

@@ -8,6 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 
+use Snaver\Sauron\Domain;
+
 class DnsChanged extends Notification
 {
     use Queueable;
