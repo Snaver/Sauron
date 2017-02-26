@@ -38,7 +38,7 @@ class Gist
             dd('No domains!');
         }
 
-        $this->gist_id = env('GITHUB_GIST_ID');
+        $this->gist_id = config('sauron.github_gist_id');
         $this->records = config('sauron.records');
         $this->locations = config('sauron.locations');
 

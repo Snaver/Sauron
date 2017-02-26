@@ -10,7 +10,7 @@ class WhoIsChecks
 
     public function run($dryRun = false, $domain = '')
     {
-        $this->gist_id = env('GITHUB_GIST_ID');
+        $this->gist_id = config('sauron.github_gist_id');
 
         if ($domain) {
             $domains = Domain::where('domain', $domain)->get();

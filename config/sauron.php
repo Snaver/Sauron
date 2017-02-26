@@ -4,6 +4,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Change contact email
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'email' => env('SAURON_EMAIL'),
+
+    /*
+    |--------------------------------------------------------------------------
     | jwa - Json WHOIS API Credentials
     |--------------------------------------------------------------------------
     |
@@ -17,7 +26,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | Github Gist ID
     |--------------------------------------------------------------------------
     |
     | https://gist.github.com/
@@ -28,17 +37,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | List of records to check
+    | List of DNS records to check
     |--------------------------------------------------------------------------
     |
     */
     'records' => [
-        'a',        // Get Host Address (A records)
-        'cname',    // Get Canonical Name (CNAME records)
-        'mx',       // Get Mail Exchange record (MX records)
-        'ns',       // Get Name Servers (NS records)
-        'spf',      // Get Sender Policy Framework (SPF records)
-        'txt',      // Get Text record (TXT records)
+        'a',        // Host Address (A records)
+        'cname',    // Canonical Name (CNAME records)
+        'mx',       // Mail Exchange record (MX records)
+        'ns',       // Name Servers (NS records)
+        'spf',      // Sender Policy Framework (SPF records)
+        'txt',      // Text record (TXT records)
     ],
 
     /*
@@ -58,11 +67,11 @@ return [
             'node' => 'de01',
             'operator' => 'Chaos Computer Club',
         ],
-        [
-            'location' => 'Netherlands',
-            'node' => 'nl01',
-            'operator' => 'StatDNS',
-        ],
+        //[
+        //    'location' => 'Netherlands',
+        //    'node' => 'nl01',
+        //    'operator' => 'StatDNS',
+        //],
         [
             'location' => 'Switzerland',
             'node' => 'ch01',

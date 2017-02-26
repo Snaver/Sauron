@@ -50,8 +50,8 @@ class WhoIsCheck implements ShouldQueue
             if (config('app.env') == 'local') Unirest\Request::verifyPeer(false);
 
             Unirest\Request::auth(
-                env('JSONWHOISAPI_CUSTOMER_ID'),
-                env('JSONWHOISAPI_API_KEY')
+                config('sauron.jsonwhoisapi_customer_id'),
+                config('sauron.jsonwhoisapi_api_key')
             );
 
             $response = Unirest\Request::get(

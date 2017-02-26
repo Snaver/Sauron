@@ -9,9 +9,14 @@ class Admin extends Model
 {
     use Notifiable;
 
-    protected $email = 'richi.evans@gmail.com';
+    protected $email = '';
 
     protected $slack_url = '';
+
+    public function __construct()
+    {
+        $this->email = config('sauron.email');
+    }
 
     public function routeNotificationForSlack()
     {
