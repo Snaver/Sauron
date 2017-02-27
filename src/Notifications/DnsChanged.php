@@ -50,7 +50,7 @@ class DnsChanged extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('A DNS record ('.$type.') for '.$this->domain->domain.' has changed.');
+            ->line('A DNS record ('.$this->type.') for '.$this->domain->domain.' has changed.');
     }
 
     /**
