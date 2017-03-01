@@ -105,6 +105,8 @@ class DnsCheck implements ShouldQueue
                         $admin->notify(new DnsChanged($this->location, $this->domain, $this->type));
                     }
 
+                    Log::info('DNS changed (' . $this->location.'/'.$this->domain->domain.'/'.$this->type . ') ' . json_encode($data));
+
                     echo $this->location.'/'.$this->domain->domain.'/'.$this->type . ' changes found - updating.'.PHP_EOL;
                 }
                 else

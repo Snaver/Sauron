@@ -84,6 +84,8 @@ class WhoIsCheck implements ShouldQueue
                         $admin->notify(new WhoisChanged($this->domain));
                     }
 
+                    Log::info('Whois changed (' . $this->domain->domain . ') ' . json_encode($response->body));
+
                     echo $this->domain->domain . ' changes found - updating.'.PHP_EOL;
                 }
                 else

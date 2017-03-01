@@ -31,6 +31,7 @@ class WhoIsChecks
             if (app('app')->environment() == 'local') break;
         }
 
-        echo 'Whois checking scheduled.' . PHP_EOL;
+        Log::info('Sauron Whois checking scheduled');
+        echo 'Sauron Whois checking scheduled.' . PHP_EOL;
     }
 }

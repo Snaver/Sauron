@@ -43,6 +43,7 @@ class DnsChecks
             if (app('app')->environment() == 'local') break;
         }
 
-        echo 'DNS record checking scheduled.' . PHP_EOL;
+        Log::info('Sauron DNS Records checking scheduled');
+        echo 'Sauron DNS record checking scheduled.' . PHP_EOL;
     }
 }
