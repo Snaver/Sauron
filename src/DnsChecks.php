@@ -5,6 +5,8 @@ namespace Snaver\Sauron;
 use Snaver\Sauron\Jobs\DnsCheck;
 use Snaver\Sauron\Domain;
 
+use Log;
+
 class DnsChecks
 {
 

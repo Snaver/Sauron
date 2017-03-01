@@ -11,6 +11,7 @@ use Snaver\Sauron\Notifications\DnsChanged;
 use Snaver\Sauron\Domain;
 use Snaver\Sauron\Admin;
 
+use Log;
 use Unirest;
 use GrahamCampbell\GitHub\GitHubManager;
 

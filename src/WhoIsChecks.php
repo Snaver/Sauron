@@ -5,6 +5,8 @@ namespace Snaver\Sauron;
 use Snaver\Sauron\Jobs\WhoIsCheck;
 use Snaver\Sauron\Domain;
 
+use Log;
+
 class WhoIsChecks
 {
 
