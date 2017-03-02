@@ -60,7 +60,7 @@ class WhoIsCheck implements ShouldQueue
                 array("Accept" => "application/json")
             );
 
-            if($response)
+            if($response && $response->code == 200)
             {
                 // Grab entire record
                 $this->gist = $github->gist()->show( $this->gist_id );
@@ -93,11 +93,13 @@ class WhoIsCheck implements ShouldQueue
                 {
                     echo $this->domain->domain .' no changes found - skipping.'.PHP_EOL;
                 }
+            } else {
+                Log::info('Whois lookup failed');
             }
 
             // Go easy..
             sleep(1);
-        } catch (Exception $ex) {
+        } catch (\Exception $e) {
             echo $e->getMessage();
 
             Log::error($e->getMessage());

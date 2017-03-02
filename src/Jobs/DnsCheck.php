@@ -62,7 +62,7 @@ class DnsCheck implements ShouldQueue
                 array("Accept" => "application/json")
             );
 
-            if($response)
+            if($response && $response->code == 200)
             {
                 $data = $response->body;
 
@@ -114,11 +114,13 @@ class DnsCheck implements ShouldQueue
                 {
                     echo $this->location.'/'.$this->domain->domain.'/'.$this->type . ' no changes found - skipping.'.PHP_EOL;
                 }
+            } else {
+                Log::info('DNS lookup failed');
             }
 
             // Go easy..
             sleep(1);
-        } catch (Exception $ex) {
+        } catch (\Exception $e) {
             echo $e->getMessage();
 
             Log::error($e->getMessage());
